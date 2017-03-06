@@ -19,10 +19,10 @@ RUN apk --update --no-cache add \
 
 # ldd fix for correct pyInstaller lib detection
 RUN mv /usr/bin/ldd /bin/ldd \
-    && echo '#!/bin/sh \n\
-        exec /bin/ldd "$@" | \
+    && echo '#!/bin/sh' > /usr/bin/ldd \
+    && echo 'exec /bin/ldd "$@" | \
         sed -r "s/([^[:space:]]+) => ldd/\1 => \/lib\/\1/g" | \
-        sed -r "s/ldd \(.*\)//g"' | sed 's/^[\t ]*//g' > /usr/bin/ldd \
+        sed -r "s/ldd \(.*\)//g"' | sed 's/^[\t ]*//g' >> /usr/bin/ldd \
     && chmod +x /usr/bin/ldd
 
 RUN  mkdir -p /app/project /app/data /app/build
