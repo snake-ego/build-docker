@@ -7,8 +7,6 @@ RUN apk --update --no-cache add \
         git \
         pwgen \
         build-base \
-        git \
-        mercurial \
     && pip install --upgrade pip \
     && git clone https://github.com/pyinstaller/pyinstaller.git /tmp/pyinstaller \
     && cd /tmp/pyinstaller/bootloader \
