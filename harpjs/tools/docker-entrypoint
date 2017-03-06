@@ -1,0 +1,21 @@
+#!/bin/bash
+
+USER='harp'
+
+if [ ! -n "$SOURCE" ]; then SOURCE="/srv/web/"; fi
+if [ ! -n "$BUILD" ]; then BUILD="/srv/build/"; fi
+
+
+function serve() {
+    suexec $USER harp server -p 9000 $SOURCE
+}
+
+function build() {
+    suexec $USER harp compile $SOURCE $BUILD
+}
+
+case "$1" in
+    serve) serve ;;
+    build) build ;;
+    *) exec "$@" ;;
+esac
