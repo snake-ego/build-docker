@@ -1,9 +1,8 @@
 FROM i386/debian:jessie-slim
-
-# Install Python 
 ENV PYVER='3.5.3'
 
-RUN echo "\033[36m === Install Python $PYVER\033[0m" \
+# Install Python 
+RUN echo "\033[36m === Install Python $PYVER === \033[0m" \
     && set -x \
     && apt update \
     && apt -y upgrade \
@@ -31,7 +30,7 @@ RUN echo "\033[36m === Install Python $PYVER\033[0m" \
     && apt-get clean \
     && cd ~ \
 
-RUN echo "\033[36m === Install PyInstaller\033[0m" \
+RUN echo "\033[36m === Install PyInstaller === \033[0m" \
     && set -x \
     && ln -sf /usr/local/bin/pip3.5 /usr/local/bin/pip \
     && pip3.5 install -U pip \

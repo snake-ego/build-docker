@@ -1,6 +1,6 @@
 FROM python:3.5
 
-RUN echo "\033[36m === Prepare\033[0m" \
+RUN echo "\033[36m === Prepare === \033[0m" \
     && set -x \
     && apt update \
     && apt -y install \
@@ -9,7 +9,7 @@ RUN echo "\033[36m === Prepare\033[0m" \
     && apt-get autoremove -y \
     && apt-get clean 
 
-RUN echo "\033[36m === Install PyInstaller\033[0m" \
+RUN echo "\033[36m === Install PyInstaller === \033[0m" \
     && set -x \
     && pip install -U pip \
     && pip install pyinstaller
