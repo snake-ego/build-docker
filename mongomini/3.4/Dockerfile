@@ -8,7 +8,7 @@ COPY docker-entrypoint /entrypoint.sh
 ADD http://af.it-test.pw/su-exec/x64/su-exec /usr/local/bin/suexec
 
 RUN echo "\033[36m === Install MongoDB $MONGO_VERSION === \033[0m" \
-    set -x \
+    && set -x \
     && echo "deb http://repo.mongodb.org/apt/debian jessie/mongodb-org/$MONGO_MAJOR main" > /etc/apt/sources.list.d/mongodb-org.list \
     && apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 0C49F3730359A14518585931BC711F9BA15703C6 \
     && install_packages \
@@ -18,7 +18,8 @@ RUN echo "\033[36m === Install MongoDB $MONGO_VERSION === \033[0m" \
         ${MONGO_PACKAGE}-shell=$MONGO_VERSION \
         ${MONGO_PACKAGE}-mongos=$MONGO_VERSION \
         ${MONGO_PACKAGE}-tools=$MONGO_VERSION \
-    && groupadd -r mongodb && useradd -r -g mongodb mongodb \
+    && (groupadd -r mongodb || true) \
+    && (useradd -r -g mongodb mongodb || true) \
     && mv /etc/mongod.conf /etc/mongod.conf.orig \
     && mkdir -p /data/db /data/configdb \
     && chown -R mongodb:mongodb /data/db /data/configdb \
