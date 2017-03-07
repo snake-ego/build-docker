@@ -24,9 +24,9 @@ RUN echo "\033[36m === Install MongoDB $MONGO_VERSION === \033[0m" \
     && mkdir -p /data/db /data/configdb \
     && chown -R mongodb:mongodb /data/db /data/configdb \
     && chmod +x /entrypoint.sh /usr/local/bin/suexec \
-    && rm -rf /var/lib/mongodb \
+    && rm -rf /var/lib/mongodb
 
-VOLUME /data/db /data/configdb
+VOLUME ["/data/db", "/data/configdb"]
 
 ENTRYPOINT ["/entrypoint.sh"]
 
