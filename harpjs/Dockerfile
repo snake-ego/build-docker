@@ -1,6 +1,7 @@
 FROM bitnami/minideb:jessie
 
-RUN set -x \
+RUN echo "\033[36m === Install NodeJS === \033[0m" \
+    && set -x \
     && export DEBIAN_FRONTEND=noninteractive \
     && install_packages \
         curl \
@@ -18,19 +19,19 @@ RUN set -x \
     && apt-get clean \
     && rm  /etc/apt/sources.list.d/node.list
 
-COPY ./tools/* /srv/
+COPY ./tools/docker-entrypoint /entrypoint.sh
+COPY ./tools/suexec.bin /usr/local/bin/suexec
 
-RUN set -x \
+RUN echo "\033[36m === Setup binary === \033[0m" \
+    && set -x \
     && chmod +x \
-        /srv/docker-entrypoint \
-        /srv/suexec \
-    && ln -s /srv/docker-entrypoint /bin/entrypoint \
-    && ln -s /srv/suexec /bin/ \
+        /entrypoint.sh \
+        /usr/local/bin/suexec \
     && groupadd -r harp \
     && useradd -r -g harp harp 
 
 VOLUME ["/srv/web", "/srv/build"]
-
 EXPOSE 9000
 
-ENTRYPOINT ["/bin/entrypoint"]
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["serve"]
