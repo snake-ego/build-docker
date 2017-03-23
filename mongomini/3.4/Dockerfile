@@ -4,8 +4,8 @@ ENV MONGO_MAJOR 3.4
 ENV MONGO_VERSION 3.4.1
 ENV MONGO_PACKAGE mongodb-org
 
-COPY docker-entrypoint /entrypoint.sh
-ADD http://af.it-test.pw/su-exec/x64/su-exec /usr/local/bin/suexec
+COPY ./tools/docker-entrypoint /entrypoint.sh
+COPY ./tools/suexec.bin /usr/local/bin/suexec
 
 RUN echo "\033[36m === Install MongoDB $MONGO_VERSION === \033[0m" \
     && set -x \
@@ -27,8 +27,7 @@ RUN echo "\033[36m === Install MongoDB $MONGO_VERSION === \033[0m" \
     && rm -rf /var/lib/mongodb
 
 VOLUME ["/data/db", "/data/configdb"]
+EXPOSE 27017
 
 ENTRYPOINT ["/entrypoint.sh"]
-
-EXPOSE 27017
 CMD ["mongod"]
