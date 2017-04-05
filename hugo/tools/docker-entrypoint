@@ -7,14 +7,18 @@ if [ ! -n "$BUILD" ]; then BUILD="/app/build/"; fi
 
 
 function serve() {
-    suexec $USER hugo server -p 8080 $SOURCE
+    suexec $USER hugo server -p 8080 --bind 0.0.0.0 $SOURCE
 }
 
 function build() {
-    suexec $USER hugo compile $SOURCE $BUILD
+    suexec $USER hugo
 }
 
 function hugo() {
+    suexec $USER $@
+}
+
+function sudo() {
     suexec $USER $@
 }
 
@@ -22,5 +26,6 @@ case "$1" in
     serve) serve ;;
     build) build ;;
     hugo) hugo $@ ;;
+    sudo) sudo $@ ;;
     *) exec "$@" ;;
 esac
