@@ -1,1 +1,2 @@
+hugo/*.bin filter=lfs diff=lfs merge=lfs -text
 mongomini/3.4/tools/suexec.bin filter=lfs diff=lfs merge=lfs -text
