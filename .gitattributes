@@ -1,2 +1,4 @@
-hugo/*.bin filter=lfs diff=lfs merge=lfs -text
-mongomini/3.4/tools/suexec.bin filter=lfs diff=lfs merge=lfs -text
+mongomini/**/*.bin filter=lfs diff=lfs merge=lfs -text
+harpjs/tools/suexec.bin filter=lfs diff=lfs merge=lfs -text
+hugo/tools/hugo.bin filter=lfs diff=lfs merge=lfs -text
+hugo/tools/suexec.bin filter=lfs diff=lfs merge=lfs -text
