@@ -1,4 +1,4 @@
-FROM python:3-alpine
+FROM python:2-alpine
 
 RUN set -x \
     && apk --update --no-cache add make \
