@@ -1,3 +1,4 @@
 mongomini/**/*.bin filter=lfs diff=lfs merge=lfs -text
 hugo/**/*.tar.xz filter=lfs diff=lfs merge=lfs -text
 harpjs/**/*.bin filter=lfs diff=lfs merge=lfs -text
+nginx-coyote/**/*.bin filter=lfs diff=lfs merge=lfs -text
